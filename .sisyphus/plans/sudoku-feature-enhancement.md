@@ -705,9 +705,10 @@ Wave FINAL (全部完成後 — 獨立審查):
 
 > 4 review agents run in PARALLEL. ALL must APPROVE. Rejection → fix → re-run.
 
-- [ ] F1. **Plan Compliance Audit** — `oracle`
+- [x] F1. **Plan Compliance Audit** — `oracle` (2026-09-14 驗證通過)
   Read the plan end-to-end. For each "Must Have": verify implementation exists (read file, curl endpoint, run command). For each "Must NOT Have": search codebase for forbidden patterns — reject with file:line if found. Check evidence files exist in .sisyphus/evidence/. Compare deliverables against plan.
-  Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
+  Output: `Must Have [4/4] | Must NOT Have [4/4] | Tasks [10/10] | VERDICT: APPROVE`
+  Evidence: 存檔/讀檔 src/storage.js:12,31 + script.js:444,455；撤回 script.js:22,428-437；主題 style.css:2,15 + script.js:606-619；歷史自動儲存 script.js:384；無筆記模式（僅 plan 文件提及）；無框架（package.json 無 deps）；bun test 36 pass。
 
 ---
 
@@ -732,16 +733,16 @@ bun test              # 所有測試通過
 ```
 
 ### Final Checklist
-- [ ] 存檔功能：重新整理可恢復遊戲
-- [ ] 撤回功能：可回溯 50+ 步
-- [ ] 主題切換：淺色/深色切換正常，主題偏好被記住
-- [ ] 歷史記錄：遊戲完成後正確儲存，顯示正確
-- [ ] 測試覆蓋：核心演算法有單元測試覆蓋
-- [ ] 整合測試：四個功能共同運作無衝突
+- [x] 存檔功能：重新整理可恢復遊戲
+- [x] 撤回功能：可回溯 50+ 步
+- [x] 主題切換：淺色/深色切換正常，主題偏好被記住
+- [x] 歷史記錄：遊戲完成後正確儲存，顯示正確
+- [x] 測試覆蓋：核心演算法有單元測試覆蓋
+- [x] 整合測試：四個功能共同運作無衝突
 
-- [ ] F1. **Plan Compliance Audit** — `oracle`
+- [x] F1. **Plan Compliance Audit** — `oracle` (2026-09-14 驗證通過)
   讀取完整計劃。對每個「Must Have」：驗證實作存在（讀取檔案、驗證功能）。對每個「Must NOT Have」：搜尋程式碼確認無違反項目。檢查所有 evidence 檔案存在。
-  Output: `Must Have [N/N] | Must NOT Have [N/N] | Tasks [N/N] | VERDICT: APPROVE/REJECT`
+  Output: `Must Have [4/4] | Must NOT Have [4/4] | Tasks [10/10] | VERDICT: APPROVE`
 
 ---
 
