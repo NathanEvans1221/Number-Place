@@ -18,7 +18,13 @@
 ```bash
 bun server.js
 # 然後訪問 http://localhost:3001/sudoku.html
-# 或 python3 -m http.server 8000
+```
+
+或使用 Python 內建伺服器：
+
+```bash
+python3 -m http.server 8000
+# 然後訪問 http://localhost:8000/sudoku.html
 ```
 
 ## 技術棧
