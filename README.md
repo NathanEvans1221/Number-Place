@@ -13,12 +13,12 @@
 
 ## 使用方式
 
-直接用瀏覽器開啟 `sudoku.html` 即可開始遊戲。
+需透過 HTTP 伺服器開啟（ES Module 不支援 `file://` 直接開檔）：
 
 ```bash
-# 或者啟動本地伺服器
-python3 -m http.server 8000
-# 然後訪問 http://localhost:8000/sudoku.html
+bun server.js
+# 然後訪問 http://localhost:3001/sudoku.html
+# 或 python3 -m http.server 8000
 ```
 
 ## 技術棧
