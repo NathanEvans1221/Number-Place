@@ -68,8 +68,8 @@ export function shuffle(array) {
 }
 
 export function generatePuzzle(difficulty) {
-    board = generateFullBoard();
-    puzzle = board.map(row => [...row]);
+    const board = generateFullBoard();
+    const puzzle = board.map(row => [...row]);
     const cells = shuffle([...Array(81).keys()]);
     const holes = DIFFICULTY[difficulty];
 
@@ -80,7 +80,7 @@ export function generatePuzzle(difficulty) {
         puzzle[row][col] = 0;
     }
 
-    userBoard = puzzle.map(row => [...row]);
+    const userBoard = puzzle.map(row => [...row]);
     return { board, puzzle, userBoard };
 }
 
@@ -143,7 +143,3 @@ export function checkWin(userBoard) {
     const errors = validateBoard(userBoard);
     return errors.size === 0;
 }
-
-let board = [];
-let puzzle = [];
-let userBoard = [];

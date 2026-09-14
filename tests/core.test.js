@@ -268,4 +268,23 @@ describe('generatePuzzle', () => {
             }
         }
     });
+
+    test('純函數：多次呼叫互不污染', () => {
+        const first = generatePuzzle('medium');
+        first.puzzle[0][0] = 99;
+        first.userBoard[0][0] = 99;
+        first.board[0][0] = 99;
+
+        const second = generatePuzzle('medium');
+        expect(second.puzzle[0][0]).not.toBe(99);
+        expect(second.userBoard[0][0]).not.toBe(99);
+        expect(second.board[0][0]).not.toBe(99);
+    });
+
+    test('純函數：回傳三盤面彼此獨立', () => {
+        const result = generatePuzzle('easy');
+        result.puzzle[0][0] = 99;
+        expect(result.board[0][0]).not.toBe(99);
+        expect(result.userBoard[0][0]).not.toBe(99);
+    });
 });
