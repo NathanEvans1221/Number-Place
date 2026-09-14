@@ -41,8 +41,10 @@
 
 ### 2.4 技術實作
 
-- **技術棧**: 單一 HTML 檔案 + 內嵌 CSS + 內嵌 JavaScript（無外部依賴）
-- **資料儲存**: 不使用後端，遊戲狀態僅存在於記憶體
+- **技術棧**: ES Module（`script.js` + `src/`）+ HTML + CSS（無外部框架依賴）
+- **模組結構**: `src/sudoku-core.js`（純函數核心演算法）、`src/storage.js`（存檔/主題/歷史）、`src/types.js`（型別定義）
+- **資料儲存**: localStorage（遊戲進度、主題偏好、歷史記錄），無後端
+- **啟動方式**: 需經由 HTTP 伺服器（`bun server.js` → :3001 或 `python3 -m http.server 8000`），ES Module 不支援 `file://` 直接開檔
 - **響應式設計**: 支援桌面與行動裝置（手機、平板）
 
 ## 3. 非功能需求 (Non-Functional Requirements)
@@ -81,20 +83,20 @@
 ## 5. 驗收標準 (Acceptance Criteria)
 
 ### 5.1 功能驗收
-- [ ] 三種難度皆可正確生成合法數獨盤面
-- [ ] 輸入 1-9 可正常寫入選取的儲存格
-- [ ] 違反數獨規則時，衝突數字以紅色顯示
-- [ ] 點擊「提示」可填入一個正確數字
-- [ ] 點擊「重置」可還原至初始狀態
-- [ ] 點擊「新遊戲」可重新生成盤面
-- [ ] 遊戲結束時顯示勝利訊息
+- [x] 三種難度皆可正確生成合法數獨盤面（`src/sudoku-core.js` 測試覆蓋 100%）
+- [x] 輸入 1-9 可正常寫入選取的儲存格（`script.js:342 inputNumber`）
+- [x] 違反數獨規則時，衝突數字以紅色顯示（`.cell.error` + `validateBoard`）
+- [x] 點擊「提示」可填入一個正確數字（`script.js:503 giveHint`）
+- [x] 點擊「重置」可還原至初始狀態（`script.js:491 resetGame`）
+- [x] 點擊「新遊戲」可重新生成盤面（`script.js:479 newGame`）
+- [x] 遊戲結束時顯示勝利訊息（`checkGameComplete` → `modalOverlay`）
 
 ### 5.2 視覺驗收
-- [ ] 選取儲存格有明顯高亮
-- [ ] 相同數字同步高亮
-- [ ] 响应式布局：在手機上可正常操作
+- [x] 選取儲存格有明顯高亮（`.cell.selected`）
+- [x] 相同數字同步高亮（`.cell.same-number`）
+- [x] 响应式布局：在手機上可正常操作（`style.css:319 @media`）
 
 ### 5.3 技術驗收
-- [ ] 單一 HTML 檔案，無外部依賴
-- [ ] 無 JavaScript 錯誤
-- [ ] 鍵盤操作流暢
+- [x] ES Module 架構，無外部框架依賴（`bun test` 39 例全綠）
+- [x] 無 JavaScript 錯誤（測試全綠 + HTTP smoke 200）
+- [x] 鍵盤操作流暢（`script.js:554 handleKeydown` 方向鍵 + 數字鍵）
