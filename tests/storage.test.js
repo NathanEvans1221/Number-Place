@@ -46,6 +46,21 @@ describe('StorageManager.saveGame/loadGame', () => {
         StorageManager.deleteSavedGame();
         expect(StorageManager.hasSavedGame()).toBe(false);
     });
+
+    test('寫入拋錯回 false', () => {
+        const orig = globalThis.localStorage.setItem;
+        globalThis.localStorage.setItem = () => { throw new Error('quota'); };
+        try {
+            expect(StorageManager.saveGame(saveData())).toBe(false);
+        } finally {
+            globalThis.localStorage.setItem = orig;
+        }
+    });
+
+    test('JSON 損壞回 null', () => {
+        store.set('sudoku-save', '{broken');
+        expect(StorageManager.loadGame()).toBeNull();
+    });
 });
 
 describe('StorageManager theme', () => {
@@ -91,5 +106,18 @@ describe('StorageManager history', () => {
         });
         StorageManager.clearHistory();
         expect(StorageManager.getHistoryRecords()).toEqual([]);
+    });
+
+    test('寫入拋錯不拋出異常', () => {
+        const orig = globalThis.localStorage.setItem;
+        globalThis.localStorage.setItem = () => { throw new Error('quota'); };
+        try {
+            expect(() => StorageManager.addHistoryRecord({
+                id: 'z', completedAt: 1,
+                difficulty: 'easy', timeSeconds: 1, wasCompleted: true
+            })).not.toThrow();
+        } finally {
+            globalThis.localStorage.setItem = orig;
+        }
     });
 });
