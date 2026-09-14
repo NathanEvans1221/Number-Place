@@ -1,6 +1,8 @@
 # Number-Place 數獨網頁版
 
-經典 9x9 數獨遊戲，單一 HTML 檔案，無需任何框架或依賴。
+經典 9x9 數獨遊戲，單一 HTML 檔案，無需任何框架或依賴。)
+
+![demo](./images/demo.png)
 
 ## 功能特點
 
