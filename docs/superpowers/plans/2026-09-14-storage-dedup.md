@@ -30,7 +30,7 @@
 - Consumes: `StorageManager`（`src/storage.js`）、`STORAGE_KEYS`（`src/types.js`）、Bun 內建 `bun:test`。
 - Produces: 覆蓋 save/load/validate/theme/history 的測試套件；後續 Task 改 `script.js` 時以此套件守行為。
 
-- [ ] **Step 1: 先寫無 mock 版，確認在 Bun 下失敗**
+- [x] **Step 1: 先寫無 mock 版，確認在 Bun 下失敗**
 
 ```js
 import { describe, test, expect } from 'bun:test';
@@ -49,7 +49,7 @@ describe('storage smoke', () => {
 Run: `bun test tests/storage.test.js`
 Expected: FAIL（`localStorage is not defined`，證明 Bun 無 DOM，需 mock）
 
-- [ ] **Step 2: 寫入完整測試（含 in-memory localStorage mock）**
+- [x] **Step 2: 寫入完整測試（含 in-memory localStorage mock）**
 
 ```js
 import { describe, test, expect, beforeEach } from 'bun:test';
@@ -149,12 +149,12 @@ describe('StorageManager history', () => {
 });
 ```
 
-- [ ] **Step 3: 執行全部測試**
+- [x] **Step 3: 執行全部測試**
 
 Run: `bun test`
 Expected: PASS（既有 28 例 + 新增 9 例 = 37 例，0 fail）
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add tests/storage.test.js
@@ -172,7 +172,7 @@ git commit -m "test(storage): 新增 StorageManager 回歸測試"
 - Consumes: Task 1 的測試套件；`StorageManager` 8 處呼叫點 API 不變（`saveGame/loadGame/hasSavedGame/deleteSavedGame/saveTheme/loadTheme/addHistoryRecord/getHistoryRecords`）。
 - Produces: 零重複的 `script.js`；`sudoku.html` 以 module 載入。
 
-- [ ] **Step 1: script.js 刪除重複並加 import**
+- [x] **Step 1: script.js 刪除重複並加 import**
 
 刪除 `script.js` 第 1–99 行（從 `// ===...` 註解到 `}` 結尾的整個
 `STORAGE_KEYS` + `StorageManager` 區塊），檔案頂部寫入：
@@ -189,18 +189,18 @@ const DIFFICULTY = {
 
 其餘 700+ 行（`DIFFICULTY` 以下）一字不動。
 
-- [ ] **Step 2: sudoku.html 改 module 載入**
+- [x] **Step 2: sudoku.html 改 module 載入**
 
 ```html
 <script type="module" src="./script.js"></script>
 ```
 
-- [ ] **Step 3: 跑測試確認行為未變**
+- [x] **Step 3: 跑測試確認行為未變**
 
 Run: `bun test`
 Expected: PASS（37 例全綠；`script.js` 未被測試直接引用，守的是 `src/` 行為）
 
-- [ ] **Step 4: http 手動驗證（`server.js` 會以 `application/javascript` 回傳 `/src/*.js`）**
+- [x] **Step 4: http 手動驗證（`server.js` 會以 `application/javascript` 回傳 `/src/*.js`）**
 
 ```bash
 bun server.js &
@@ -209,7 +209,7 @@ bun server.js &
 kill %1
 ```
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add script.js sudoku.html
@@ -226,7 +226,7 @@ git commit -m "refactor(storage): script.js 共用 src StorageManager 刪除重�
 - Consumes: Task 2 的 module 化結果。
 - Produces: 正確的啟動文件；push 到 `main`。
 
-- [ ] **Step 1: 更新 README 使用方式**
+- [x] **Step 1: 更新 README 使用方式**
 
 ```markdown
 ## 使用方式
@@ -240,7 +240,7 @@ bun server.js
 ```
 ```
 
-- [ ] **Step 2: 最終驗證並 push**
+- [x] **Step 2: 最終驗證並 push**
 
 ```bash
 bun test
@@ -250,7 +250,7 @@ git push
 
 Expected: 測試全綠、`diff --check` 無輸出、push 成功。
 
-- [ ] **Step 3: Commit（含 push）**
+- [x] **Step 3: Commit（含 push）**
 
 ```bash
 git add README.md
